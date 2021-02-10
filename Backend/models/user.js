@@ -34,7 +34,40 @@ const userSchema = new Schema({
     usertype: {
         type: Number,
         required: true
-    }
+    },
+    
+    cart: {
+        items: [
+            {
+                productId: {
+                    type: Schema.Types.ObjectId,
+                    ref: 'Product',
+                    required: true
+                },
+                productTitle: {
+                    type: String
+                },
+                productPrice: {
+                    type: Number
+                },
+                quantity: {
+                    type: Number,
+                    required: true
+                }
+            }
+        ]
+    },
+    listofrequests: {
+        requests: [
+            {
+                requestId: mongoose.Schema.Types.ObjectId
+            }
+        ]
+    },
+    listoforders:{
+        orders:[{
+            orderId: mongoose.Schema.Types.ObjectId
+    }]}
 });
 userSchema.methods.addToCart = function (product) {
     const cartProductIndex = this.cart.items.findIndex(cartprod => {
@@ -70,6 +103,28 @@ userSchema.methods.removeFromCart = function (productId) {
         //jer ga brisemo, toString()
     });
     this.cart.items = updatedCartItems;
+    return this.save();
+};
+userSchema.methods.addReq = function (r) {
+    const updatedRlist = [...this.listofrequests.requests];
+    updatedRlist.push({
+        requestId: r._id
+    });
+    updatedlist = {
+        requests: updatedRlist
+    };
+    this.listofrequests = updatedlist
+    return this.save();
+}
+userSchema.methods.removeReq = function (requestId) {
+    console.log(requestId)
+    const updated = this.listofrequests.requests.filter(item => {
+        return item.requestId.toString() !== requestId.toString();
+        //vracamo tacno ako hocem oda zadrzimo element
+        //ali nama ipak treba netacno (false)
+        //jer ga brisemo, toString()
+    });
+    this.listofrequests.requests = updated;
     return this.save();
 };
 userSchema.methods.addOrder = function (orderId) {

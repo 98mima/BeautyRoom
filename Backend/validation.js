@@ -35,7 +35,22 @@ const orderValidation = (data) => {
     });
     return schema.validate(data);
 }
+const requestValidation = (data) => {
+    const schema = Joi.object({
+        location: Joi.string().min(3),
+        date: Joi.string(),
+        comment: Joi.string(),
+        type: Joi.string(),
+        status: Joi.string(),
+        korisnikid: Joi.string(),
+        korIme: Joi.string(),
+        time: Joi.string(),
+        reqId: Joi.string()
+    });
+    return schema.validate(data);
+};
 
+module.exports.requestValidation = requestValidation
 module.exports.orderValidation = orderValidation;
 module.exports.productValidation = productValidation;
 module.exports.registerValidation = registerValidation;

@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const auth = require('./routes/auth');
 const admin = require('./routes/admin');
+const request = require('./routes/request');
 const shop = require('./routes/shop');
 const user = require('./routes/user');
 const cors = require('cors');
@@ -25,6 +26,7 @@ app.use(cors());
 
 app.use('/auth', auth);
 app.use('/admin', admin);
+app.use('/request', request);
 app.use('/shop', shop);
 app.use('/user', user);
 
