@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const auth = require('./routes/auth');
+const admin = require('./routes/admin');
 const user = require('./routes/user');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/auth', auth);
+app.use('/admin', admin);
 app.use('/user', user);
 
 mongoose
