@@ -1,5 +1,5 @@
 import Vue from "vue";
-import App from "./components/forms/FormDodajProizvod.vue";
+import App from "./components/forms/FormZakazi.vue";
 import router from './routes/route'
 import ElementUI from "element-ui";
 //import FormLogin from './pages/Uprava';
