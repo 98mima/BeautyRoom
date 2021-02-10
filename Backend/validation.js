@@ -29,7 +29,14 @@ const productValidation = (data) => {
     });
     return schema.validate(data);
 }
+const orderValidation = (data) => {
+    const schema = Joi.object({
+        userId: Joi.string()
+    });
+    return schema.validate(data);
+}
 
+module.exports.orderValidation = orderValidation;
 module.exports.productValidation = productValidation;
 module.exports.registerValidation = registerValidation;
 module.exports.loginValidation = loginValidation;
