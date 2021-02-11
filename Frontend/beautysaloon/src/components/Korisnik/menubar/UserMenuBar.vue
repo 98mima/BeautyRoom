@@ -19,8 +19,7 @@ import NarudzbineKorisnik from "./NarudzbineKorisnik.vue";
 export default {
     components: {
         // eslint-disable-next-line vue/no-unused-components
-        FooterBar, SideBarProfil, UserRequests, PromenaLozinke, UserProfileInfoPage, NarudzbineKorisnik
-    },
+        FooterBar, SideBarProfil, UserRequests, PromenaLozinke, UserProfileInfoPage, NarudzbineKorisnik},
     data() {
         return{
             ProfilData: [],

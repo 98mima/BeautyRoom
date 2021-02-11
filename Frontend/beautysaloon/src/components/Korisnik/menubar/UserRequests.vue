@@ -52,7 +52,7 @@ export default {
         },
         pribaviZahtev(){
             let userId = getUserInfo().userID;
-            fetch(destinationUrl + '/Request/GetRequestsByUserId/?id=' + userId, {method: "GET"})
+            fetch(destinationUrl + '/request/getByUserId/?userId=' + userId, {method: "GET"})
                 .then(response => response.ok ? response.json() : new Error())
                 .then(result => {
                     this.listaZahteva = result.Data;

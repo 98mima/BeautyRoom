@@ -55,7 +55,7 @@ export default {
                 formData.append("CartItems[" + index + "].Title", item.Title);
                 formData.append("CartItems[" + index + "].Price", item.Price);
             });
-            fetch(destinationUrl + "/Order/PerformOrder", {
+            fetch(destinationUrl + "/shop/create-order", {
                 method: 'POST', body: formData
             }).then(response => response.ok ? response.json() : new Error())
             .then(result=>{
@@ -80,11 +80,11 @@ export default {
             const formData = new FormData();
             formData.append("CartId", this.cartId);
             formData.append("CartItemId", cartItem.Id);
-            fetch(destinationUrl + "/Cart/DeleteItem", {method: 'POST', body: formData});
+            fetch(destinationUrl + "/shop/cart-delete-item", {method: 'POST', body: formData});
         }
     },
     mounted() {
-        fetch(destinationUrl + "/Cart/GetCartByUserId/?userId=" + getUserInfo().userID, {method: 'GET'})
+        fetch(destinationUrl + "/shop/cart/?userId=" + getUserInfo().userID, {method: 'GET'})
             .then(response => response.ok ? response.json() : new Error())
             .then(result => {
                 if(result.Success) {

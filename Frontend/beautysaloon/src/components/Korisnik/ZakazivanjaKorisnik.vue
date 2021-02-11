@@ -56,7 +56,7 @@ export default {
             });
         },
         pribaviListuZahteva: async function(){
-            apiFetch('GET', destinationUrl + "Request/GetAllRequests")
+            apiFetch('GET', destinationUrl + "request/all")
             .then(result=>{
                 if(result.Success)
                 {

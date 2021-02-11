@@ -48,7 +48,7 @@ export default {
     methods: {
         loadOrders(){
             let userId = getUserInfo().userID;
-            fetch(destinationUrl + '/Order/GetOrdersByUserId/?userId=' + userId, {method: "GET"})
+            fetch(destinationUrl + '/shop/ordersByUserId/?userId=' + userId, {method: "GET"})
                 .then(response => response.ok ? response.json() : new Error())
                 .then(result =>{
                     this.listaNarudzbina = sortOrdersByDate(result.Data, false);

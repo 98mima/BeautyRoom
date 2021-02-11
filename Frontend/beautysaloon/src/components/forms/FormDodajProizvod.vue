@@ -69,7 +69,7 @@ export default {
             if(!this.validacija())
                 return;
             if(this.isUploadingDone && !this.isSpinnerActive) {
-                apiFetch('POST', destinationUrl + "/Product/AddShopProduct", this.proizvod)
+                apiFetch('POST', destinationUrl + "/admin/addProduct", this.proizvod)
                     .then(result => {
                         if(result.Success) {
                             this.$message("Uspešno ste dodali novi proizvod!");
