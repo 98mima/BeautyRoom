@@ -51,7 +51,7 @@ export default {
     },
     mounted: function() {
         let nextPage = getPageToShow().page;
-        if(nextPage != "Pocetna")
+        if(nextPage != "pocetna")
             this.showComp = getPageToShow().page;
         else this.showComp = "profil";
         this.userType = getUserInfo().userType;
