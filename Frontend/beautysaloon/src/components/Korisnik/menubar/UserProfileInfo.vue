@@ -91,7 +91,6 @@ export default {
         width: 100%;
         padding: 1em;
         background: rgba(249, 227, 254, 0.986);
-        //background: rgba(251, 230, 237, 0.986);
         border-radius: 10px;
         display: flex;
         flex-direction: column;

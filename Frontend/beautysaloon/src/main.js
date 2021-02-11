@@ -1,8 +1,7 @@
 import Vue from "vue";
-import App from "./components/Korisnik/menubar/UserRequests.vue";
+import App from "./pages/Korisnik.vue";
 import router from './routes/route'
 import ElementUI from "element-ui";
-//import FormLogin from './pages/Uprava';
 import "element-ui/lib/theme-chalk/index.css";
 import BootstrapVue from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap.css";

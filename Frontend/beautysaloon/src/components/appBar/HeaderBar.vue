@@ -16,13 +16,13 @@
                         <a style="text-decoration:none; color:white;">{{item.label}}</a>
                     </li>
                     <li v-if="this.type == ANONYMOUS_USER_TYPE">
-                        <el-button type="primary" @click="logovanje()" style="border-color:rgba(24, 102, 89, 0.925); background-color:rgba(24, 102, 89, 0.925);" round> Prijavi se 
+                        <el-button type="primary" @click="logovanje()" style="border-color:rgba(213, 34, 92, 0.925); background-color:rgba(213, 34, 92, 0.925);" round> Prijavi se 
                     </el-button> </li>
                     <li v-if="this.type == REGULAR_USER_TYPE">
                         <el-button type="primary" @click="signOut()">Odjava
                     </el-button> </li>
                     <li v-if="this.type == ANONYMOUS_USER_TYPE"> 
-                        <el-button type="primary" class="dugme" @click="Signup()" style="color:rgba(24, 102, 89, 0.925); background-color:rgba(30, 187, 174, 0.979); border-color:rgba(30, 187, 174, 0.979);" >Registruj se
+                        <el-button type="primary" class="dugme" @click="Signup()" style="color:white; background-color:rgba(213, 34, 92, 0.979); border-color:rgba(213, 34, 92, 0.979);" round >Registruj se
                     </el-button></li>
                     <li v-if="this.type == REGULAR_USER_TYPE" @click="emitMenuSelect('korpa')">
                         <el-button type="primary" class="dugme" @click="$emit('signup')" plain >
@@ -162,7 +162,7 @@ export default {
         align-items: center;
     }
     .list-item:hover{
-        background-color: rgba(30, 187, 174, 0.979);
+        background-color: rgba(111, 201, 37, 0.979);
         transition-duration: 500ms;
         border-radius: 6px;
     }

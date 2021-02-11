@@ -4,11 +4,11 @@
             <h3>Lista zakazanih usluga</h3>
             <el-table :data="this.listaZahteva"
                 :default-sort="{prop:'Date', order:'ascending'}"
-                style="font-size:17px; width:100%;" max-height="250">
-                <el-table-column prop="Date" label="Datum" class="table-column" sortable></el-table-column>
-                <el-table-column prop="Time" label="Vreme" class="table-column"></el-table-column>
-                <el-table-column prop="EventType" label="Tip" class="table-column"></el-table-column>
-                <el-table-column prop="RequestStatus" align="center" label="Status">
+                style="font-size:21px; width:100%; font-family:Helvetica Neue;"  max-height="250">
+                <el-table-column prop="Date" label="Datum" class="table-column" sortable width="300"></el-table-column>
+                <el-table-column prop="Time" label="Vreme" class="table-column" width="300"></el-table-column>
+                <el-table-column prop="EventType" label="Tip" class="table-column" width="300"></el-table-column>
+                <el-table-column prop="RequestStatus" align="center" label="Status" width="300">
                     <template slot-scope="scope" label="Status">
                         <el-button v-if="scope.row.RequestStatus == 1" type="success"
                             icon="el-icon-check" circle @click="obavestenje(scope.row)"></el-button>

@@ -3,11 +3,8 @@
         <el-form class="zakazi-forma">
             <div class="stavka">
                 <label>Datum:</label>
-                <el-date-picker
-      v-model="value1"
-      type="date"
-      placeholder="Pick a day">
-    </el-date-picker>
+                <el-date-picker v-model="value1" type="date" placeholder="Pick a day">
+                </el-date-picker>
              <!--   <el-input
                     :disabled="false" :value="this.date" readonly
                     v-model="this.date" placeholder="Datum iz kalendara">{}</el-input>-->
@@ -44,7 +41,6 @@ export default {
         return{
             value1:'',
             podaciZakazi: {
-                Location: '',
                 Date: '',
                 Description: '',
                 EventType: '',
@@ -79,7 +75,7 @@ export default {
     },
     methods: {
         validacija() {
-            if(this.podaciZakazi.Location == '' || this.podaciZakazi.Date == '' || this.podaciZakazi.EventType == '' || this.podaciZakazi.Time == ''){
+            if(this.podaciZakazi.value1 == '' || this.podaciZakazi.EventType == '' || this.podaciZakazi.Time == ''){
                 this.$message({message: "Morate popuniti sva polja!", type: 'warning'})
                 return false
             }
@@ -125,7 +121,20 @@ export default {
             this.podaciZakazi.AdditionalRequests = "";
             this.podaciZakazi.EventType = "";
             this.podaciZakazi.Time = "";
-            this.podaciZakazi.Location = "";
+        },
+        radi(value1){
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+            today = yyyy + '-' + mm + '-' + dd  ;
+            if(value1 > today){
+                this.datum = value1
+            }    
+            else{
+                this.$message({message: "Morate izabrati predstojeći datum!", type: 'warning'})
+                this.datum = ''
+            }
         }
     },
     beforeMount(){

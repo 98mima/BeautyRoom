@@ -1,25 +1,25 @@
 <template>
     <div class="side-bar-profil">
-        <el-tabs :tab-position="tabPosition" style="background: linear-gradient(0deg, rgba(173, 226, 222, 0.938), rgba(22, 177, 164, 0.979) );  font-size:20px;"
+   <!--     <el-tabs :tab-position="tabPosition" style="background: linear-gradient(0deg, rgba(173, 226, 222, 0.938), rgba(22, 177, 164, 0.979) );  font-size:20px;"
                     background-color="rgba(52, 211, 198, 0.986)"  @select="emitMenuSelect($event)" :router="false">
             <el-tab-pane v-for="item in itemList" :key="item.key" class="side-menu-item" :index="item.index"
                         style=" background: linear-gradient(0deg, rgba(39, 160, 150, 0.938), rgba(22, 177, 164, 0.979) );">
                        <img v-if="item.slika != undefined" style="height:30%; margin-right: 1em; margin-left:0.1em; position:left;
                        margin-top:0px;" :src="getImgUrl(item.slika)"/>{{item.label}}></el-tab-pane>
-        </el-tabs>
-         <!-- <el-menu style="
-                    background: linear-gradient(0deg, rgba(173, 226, 222, 0.938), rgba(22, 177, 164, 0.979) );  font-size:20px;"
+        </el-tabs>-->
+         <el-menu style="
+                    background: linear-gradient(0deg, rgba(247, 204, 218, 0.938), rgba(169, 27, 73, 0.979) );  font-size:20px;"
                     background-color="rgba(52, 211, 198, 0.986)"
                     mode="vertical"
                     text-color="white" 
                     active-text-color="rgba(144, 225, 240, 0.938)"
                     @select="emitMenuSelect($event)" :router="false">
                     <el-menu-item v-for="item in itemList" :key="item.key" class="side-menu-item" :index="item.index"
-                        style=" background: linear-gradient(0deg, rgba(39, 160, 150, 0.938), rgba(22, 177, 164, 0.979) );">
+                        style=" background: linear-gradient(0deg, rgba(147, 23, 64, 0.938), rgba(169, 27, 73, 0.979) );">
                        <img v-if="item.slika != undefined" style="height:30%; margin-right: 1em; margin-left:0.1em; position:left;
                        margin-top:0px;" :src="getImgUrl(item.slika)"/>{{item.label}}
                     </el-menu-item>
-                </el-menu> -->
+                </el-menu>
     </div>
 </template>
 
