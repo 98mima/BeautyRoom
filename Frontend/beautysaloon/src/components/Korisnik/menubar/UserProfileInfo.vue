@@ -54,7 +54,7 @@ export default {
     methods: {
         getUser() {
             let userId = getUserInfo().userID;
-            fetch(destinationUrl + 'User/GetUserById/?id=' + userId, {method: "GET"})
+            fetch(destinationUrl + 'user/findById/?userId=' + userId, {method: "GET"})
                 .then(response => response.ok ? response.json() : new Error())
                 .then(result => {
                     this.user.FirstName = result.Data.FirstName;

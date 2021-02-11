@@ -89,7 +89,7 @@ export default {
             this.podaciZakazi.FirstName = this.user.FirstName;
             this.podaciZakazi.LastName = this.user.LastName;
             this.podaciZakazi.UserId = getUserInfo().userID;
-            apiFetch('POST', destinationUrl + "/Request/CreateRequest", this.podaciZakazi)
+            apiFetch('POST', destinationUrl + "/request/add", this.podaciZakazi)
             .then(result => {
                 if(result.Success){
                     this.$message({message: "Uspesno ste zakazali termin.", type: 'success'});

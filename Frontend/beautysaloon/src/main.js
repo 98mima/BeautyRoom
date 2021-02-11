@@ -1,5 +1,5 @@
 import Vue from "vue";
-import App from "./pages/Korisnik.vue";
+import App from "./components/Korisnik/menubar/UserMenuBar.vue";
 import router from './routes/route'
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";

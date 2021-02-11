@@ -45,7 +45,7 @@ export default {
         onLoginSubmit() {
             if(!this.isDataValid()) 
                 return;
-            apiFetch('POST', destinationUrl + "/User/SignIn", this.loginData)
+            apiFetch('POST', destinationUrl + "/auth/login", this.loginData)
                 .then(result => {
                     if(result.Succes){
                         setUserInfo(result.Data.Id, result.Data.UserType);
