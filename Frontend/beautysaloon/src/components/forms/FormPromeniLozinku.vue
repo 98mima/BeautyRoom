@@ -5,6 +5,9 @@
                 <el-popover>
                     <img :src="Logo" style="height:130px; width: 170px; margin: 0 auto; display:flex; justify-self: center;" slot="reference"/> 
                 </el-popover>
+                <div class="naziv">
+                    <h5>Promena lozinke</h5>
+                </div>
                 <div class="stavka">
                     <label>Unesite staru lozinku:</label>
                     <el-input type="password" v-model="oldPass" size="small"></el-input>
@@ -18,7 +21,7 @@
                     <el-input type="password" v-model="newPassRepeat" size="small" show-password></el-input>
                 </div>
                 <div class="dugme">
-                    <el-button @click="ponistiUnos" size="small" type="danger" style="background-color:white; border-color:white; color:rgba(213, 34, 92, 0.925);">Potvrdi</el-button>
+                    <el-button @click="potvrdiUnos" size="small" type="success" icon="el-icon-check" circle style=" background-color:rgba(213, 34, 92, 0.925); border-color:rgba(213, 34, 92, 0.925);"></el-button>
                     <el-button @click="ponistiUnos" size="small" type="danger" style="background-color:white; border-color:white; color:rgba(213, 34, 92, 0.925);">Poništi</el-button>
                 </div>
             </el-form>
@@ -27,11 +30,11 @@
 </template>
 
 <script>
-import logo from '../../assets/logo2.png';
+import logofirme2 from '../../assets/logo2.png';
 export default {
     data(){
         return{
-            Logo: logo,
+            Logo: logofirme2,
             oldPass: '',
             newPass: '',
             newPassRepeat: ''

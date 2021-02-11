@@ -3,15 +3,12 @@
         <header-bar :list="this.menuItems" @showHomePage="setComponent($event)"
             @changeView="setComponent($event)" :type="this.userType">
         </header-bar>
-        <div class="main" v-if="this.showComp == 'pocetna'">
-            
-        
+        <div class="main" v-if="this.showComp == 'pocetna'"></div>
         <proizvodi v-if="this.showComp == 'proizvodi'"></proizvodi>
-       <!-- <korpa-korisnik v-if="this.showComp == 'korpa'"></korpa-korisnik> -->
+        <korpa-korisnik v-if="this.showComp == 'korpa'"></korpa-korisnik>
         <zakazivanja-korisnik v-if="this.showComp == 'zakazivanja'" ></zakazivanja-korisnik>
         <user-sidebar v-if="this.showComp == 'profil'" ></user-sidebar>
         <footer-bar class="footer"></footer-bar>
-        </div>
     </div>
 </template>
 
@@ -21,15 +18,15 @@ import FooterBar from '../components/appBar/FooterBar.vue'
 import Proizvodi from "../components/Korisnik/Proizvodi.vue"
 import { setPageShown, getUserInfo, setUserInfo } from '../services/contextManagement';
 import UserSidebar from "../components/Korisnik/menubar/UserMenuBar.vue";
-//import KorpaKorisnik from "../components/Korisnik/KorpaKorisnik.vue";
+ import KorpaKorisnik from "../components/Korisnik/KorpaKorisnik.vue";
 import ZakazivanjaKorisnik from "../components/Korisnik/ZakazivanjaKorisnik.vue";
 import { ANONYMOUS_USER_TYPE } from '../services/authFetch';
 export default {
-    components: {HeaderBar, FooterBar, Proizvodi, UserSidebar, ZakazivanjaKorisnik},
+    components: {HeaderBar, FooterBar, KorpaKorisnik, Proizvodi, UserSidebar, ZakazivanjaKorisnik},
     data() {
         return{
             count: 0,
-            //showComp:'',
+            // showComp:'',
             menuItems: [
                 {
                     key: 1,
@@ -74,18 +71,17 @@ export default {
         overflow: auto;
         margin-left: auto;
         margin-right: auto;
-       
-        
+        background-size: cover;
+        background-position: bottom;
+        background-image: linear-gradient(
+            rgba(26, 111, 168, 0.171),
+            rgba(57, 63, 61, 0.205)
+        ),url("../assets/pozadina.png"); 
     }
 
     .main {
         height: 100%;
         z-index: 5;
-         background-size: cover;
-        background-image: linear-gradient(
-            rgba(26, 111, 168, 0.171),
-            rgba(57, 63, 61, 0.205)
-        ),url("../assets/pozadina.png"); 
     }
 
     .information {
@@ -99,10 +95,10 @@ export default {
 
     .info{
         width: 100%;
-        height: 60%;
-        padding: 40px 40px;
-        padding-top: 50px;
-        margin-top: 120px;
+        height: 70%;
+        padding: 60px 60px;
+        padding-top: 80px;
+        margin-top: 100px;
         justify-content: center;
         background-color: rgba(231, 231, 236, 0.4);
         border-radius: 8px;
@@ -118,7 +114,6 @@ export default {
     h3 {
         text-align: center;
     } 
-
   @media screen and (max-width: 800px) {
       .information{
           flex-direction: column;

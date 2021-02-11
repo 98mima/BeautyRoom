@@ -8,13 +8,13 @@
                     </el-popover>
                     <div class="stavka">
                         <label>E-mail:</label>
-                        <el-input class="input" v-model="loginData.Email">
+                        <el-input class="input" v-model="loginData.email">
                              <i class="el-icon-edit el-input__icon" slot="suffix"></i>
                         </el-input>
                     </div>
                     <div class="stavka">
                         <label>Lozinka:</label>
-                        <el-input class="input" v-model="loginData.Password" show-password></el-input>
+                        <el-input class="input" v-model="loginData.password" show-password></el-input>
                     </div>
                     <div class="dugme">
                         <el-button @click="onLoginSubmit()" round style="color:white; border-color:rgba(213, 34, 92, 0.925); background-color:rgba(213, 34, 92, 0.925);">Prijavi se</el-button>
@@ -27,17 +27,17 @@
 </template>
 
 <script>
-import logo from '../../assets/logo2.png';
+import logofirme2 from '../../assets/logo2.png';
 import { apiFetch, destinationUrl, UserTypes } from '../../services/authFetch';
-import { setUserInfo } from '../../services/contextManagement';
+import {setUserInfo} from '../../services/contextManagement';
 import {ERRORS} from '../../data/errorsCode';
 export default {
     data () {
         return {
-            Logo: logo,
+            Logo: logofirme2,
             loginData: {
-                Email: '',
-                Password: ''
+                email: '',
+                password: ''
             }
         }
     },
@@ -47,9 +47,12 @@ export default {
                 return;
             apiFetch('POST', destinationUrl + "/auth/login", this.loginData)
                 .then(result => {
-                    if(result.Succes){
-                        setUserInfo(result.Data.Id, result.Data.UserType);
-                        window.location.href = "/" + UserTypes[result.Data.UserType];
+                    //console.log(result);
+                    if(result.Success){
+                        // setCredentials(result.Data.AuthToken);
+                        console.log(result);
+                        setUserInfo(result.Data.id, result.Data.usertype);
+                        window.location.href = "/" + UserTypes[result.Data.usertype];
                     }
                     else if(result.Errors != null && result.Errors.length != 0) {
                         this.$message({message: ERRORS[result.Errors[0].Code], type:"error"});

@@ -2,8 +2,8 @@
     <div class="footer-container">
         <div class="pad-group">
             <div class="grid-one-half" style="color:white;">
-                <p>Beauty Saloon © 2021. All Rights Reserverd</p>
-                <p>Kontakt telefon: 018/734-696</p>
+                <p>Beauty Room © 2021. All Rights Reserverd</p>
+                <p>Kontakt telefon: 018/548-156</p>
                 <p>Bulevar Nemanjića, Zona 3, 18000 Niš Srbija</p>
             </div>
         </div>
@@ -19,10 +19,10 @@ export default {
 <style scoped>
     .footer-container{
         display: flex;
-        justify-content: end;
-        width: 100%; 
+        justify-content: flex-end;
+        /* align-items: flex-end; */
+        width: 100%;
         background-color:  rgba(111, 201, 37, 0.925);
-         
     }
     .pad-group{
         padding: 15px 30px 15px;

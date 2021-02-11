@@ -1,24 +1,10 @@
 <template>
-    <div class="kalendar-container">
-      <!--    <div class="kalendar">
-          <el-calendar v-model="value" class="kalendar" style="background-color:rgba(173, 226, 222, 0.938);">
-                <template slot="dateCell" slot-scope="{date, data}">
-                    <p v-if="vratiZahteve(data)"></p>
-                    <div class="element" @click="radi(data.day)">
-                        <p :class="data.isSelected ? 'is-active' : ''">{{data.day.split('-').slice(2).join('-')}}</p>
-                        <el-badge v-if="data.isSeleted" :value="counts[data.day]"  class="item" type="warning" aria-setsize="big">
-                            <p :class="data.isSelected ? 'is-active' : ''"></p>
-                        </el-badge>
-                    </div>
-                </template> 
-            </el-calendar>
-        </div>  -->
-        <form-zakazi :value1="datum" @zakazano="osveziPrikaz"></form-zakazi>
+    <div class="container">
+        <form-zakazi :date="datum" @zakazano="osveziPrikaz"></form-zakazi>
     </div>
 </template>
 
 <script>
-//import PrikazKalendaraKorisnik from "./PrikazKalendaraKorisnik.vue"
 import FormZakazi from "../forms/FormZakazi.vue"
 import { getUserInfo } from '../../services/contextManagement';
 import { destinationUrl, apiFetch } from '../../services/authFetch'
@@ -27,6 +13,7 @@ export default {
     components: {FormZakazi},
     data() {
         return{
+            value: new Date(),
             datum: '',
             listaZahteva: [],
             datumi:[],
@@ -35,14 +22,14 @@ export default {
         }
     },
     methods: {
-        radi(value1){
+        radi(date){
             var today = new Date();
             var dd = String(today.getDate()).padStart(2, '0');
             var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
             var yyyy = today.getFullYear();
             today = yyyy + '-' + mm + '-' + dd  ;
-            if(value1 > today){
-                this.datum = value1
+            if(date > today){
+                this.datum = date
             }    
             else{
                 this.$message({message: "Morate izabrati predstojeći datum!", type: 'warning'})
@@ -54,19 +41,6 @@ export default {
                 if(data.day==el)
                     data.isSelected=true
             });
-        },
-        pribaviListuZahteva: async function(){
-            apiFetch('GET', destinationUrl + "request/all")
-            .then(result=>{
-                if(result.Success)
-                {
-                    this.listaZahteva=result.Data;
-                    this.listaZahteva=this.listaZahteva.filter(x=>x.RequestStatus != 2);
-                    this.pribaviDatum(this.listaZahteva);
-                }
-                else
-                    this.$message({message:"Došlo je do greske prilikom učitavanja zahteva!", type:'error'})
-            }).catch(error=>{console.log(error)});
         },
         pribaviDatum(datumi) {
             this.datumi=[];
@@ -89,14 +63,30 @@ export default {
             this.countDate();
         }
     },
-    beforeMount(){
-        this.pribaviListuZahteva();
-        this.userId=getUserInfo().userID;
+    mounted: function() {
+            apiFetch('GET', destinationUrl + "/request/getByUserId/" + getUserInfo().userID)
+             .then(result => {
+                    console.log(result.Data)
+                if(result.Success) {
+                    this.listaZahteva=result.Data;
+                    this.listaZahteva=this.listaZahteva.filter(x=>x.RequestStatus != 2);
+                    this.pribaviDatum(this.listaZahteva);
+                }
+            }).catch(error => console.log(error));
+        
     }
 }
 </script>
 
 <style scoped>
+    .container{
+        display: flex;
+            height: 100%;
+            width: 100%;
+            flex-direction: column;
+            overflow: auto;
+            background-color: rgba(224, 224, 235, 0.445);
+    }
     .element{
         height: 100%;
         width: 100%;
@@ -109,7 +99,7 @@ export default {
     .kalendar{
         margin: 20px 100px 50px;
     }
-    footer-bar{
+    /* footer-bar{
         justify-content: flex-end;
-    }
+    } */
 </style>

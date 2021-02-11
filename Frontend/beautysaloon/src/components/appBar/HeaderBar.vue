@@ -4,10 +4,10 @@
             <div class="navbar-left">
                 <el-popover
                     placement="top-start"
-                    title="Beauty Saloon"
+                    title="Beauty Room"
                     width="200"
                     trigger="hover">
-                    <img :src="Logo" @click="showHomePage()" style="height:130px; width: 200px;" slot="reference"/> 
+                    <img :src="Logo" @click="showHomePage()" style="height:150px; width: 200px;" slot="reference"/> 
                </el-popover>
             </div>
             <div class="navbar-right">
@@ -22,7 +22,7 @@
                         <el-button type="primary" @click="signOut()">Odjava
                     </el-button> </li>
                     <li v-if="this.type == ANONYMOUS_USER_TYPE"> 
-                        <el-button type="primary" class="dugme" @click="Signup()" style="color:white; background-color:rgba(213, 34, 92, 0.979); border-color:rgba(213, 34, 92, 0.979);" round >Registruj se
+                        <el-button type="primary" class="dugme" @click="Signup()" style="border-color:rgba(213, 34, 92, 0.925); background-color:rgba(213, 34, 92, 0.925);" round>Registruj se
                     </el-button></li>
                     <li v-if="this.type == REGULAR_USER_TYPE" @click="emitMenuSelect('korpa')">
                         <el-button type="primary" class="dugme" @click="$emit('signup')" plain >
@@ -49,9 +49,11 @@
 
 <script>
 import popover from 'element-ui';
-import logo from '../../assets/logo2.png';
-import { apiFetch, destinationUrl, ANONYMOUS_USER_TYPE, REGULAR_USER_TYPE } from '../../services/authFetch';
-import { clearSessionStorage, clearLocalStorage, getPageToShow, setUserInfo, getUserInfo } from '../../services/contextManagement';
+import logofirme from '../../assets/logo2.png';
+import { deleteCredentials, ANONYMOUS_USER_TYPE, REGULAR_USER_TYPE } from '../../services/authFetch';
+// import { clearSessionStorage, clearLocalStorage, getPageToShow, setUserInfo, getUserInfo } from '../../services/contextManagement';\
+import {clearUserInfo, clearFormMode, clearPageShown, getUserInfo, getPageToShow} from "../../services/contextManagement";
+    // import {deleteCredentials} from "../services/authFetch";
 import FormLogin from "../forms/FormLogin.vue";
 import FormSignup from "../forms/FormSignup.vue";
 import menu from '../../assets/menu.png'
@@ -65,7 +67,7 @@ export default {
             showComp: '',
             ANONYMOUS_USER_TYPE: ANONYMOUS_USER_TYPE,
             REGULAR_USER_TYPE: REGULAR_USER_TYPE,
-            Logo: logo
+            Logo: logofirme
         }
     },
     methods: {
@@ -77,16 +79,21 @@ export default {
         showHomePage() {
             this.$emit('showHomePage', "pocetna");
         },
-        signOut() {
-            apiFetch('POST', destinationUrl + "/User/SignOut")
-                .then(result => {
-                    if(result.Success) {
-                        clearLocalStorage();
-                        clearSessionStorage();
-                        setUserInfo(null, ANONYMOUS_USER_TYPE);
-                        window.location.href = "/";
-                    }
-                });
+        signOut: function() {
+            deleteCredentials()
+            clearUserInfo()
+            clearFormMode()
+            clearPageShown()
+            window.location.href = '/login'
+            // apiFetch('POST', destinationUrl + "/User/SignOut")
+            //     .then(result => {
+            //         if(result.Success) {
+            //             clearLocalStorage();
+            //             clearSessionStorage();
+            //             setUserInfo(null, ANONYMOUS_USER_TYPE);
+            //             window.location.href = "/";
+            //         }
+            //     });
         },
         signupEnd: function(){
             this.showComp = getPageToShow().page;
@@ -162,7 +169,7 @@ export default {
         align-items: center;
     }
     .list-item:hover{
-        background-color: rgba(111, 201, 37, 0.979);
+        background-color: rgba(196, 238, 162, 0.979);
         transition-duration: 500ms;
         border-radius: 6px;
     }

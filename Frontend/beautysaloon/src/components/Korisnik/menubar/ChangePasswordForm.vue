@@ -13,8 +13,8 @@
             <el-input class="input" type="password" v-model="newPassRepeat" size="small" show-password></el-input>
         </div>
         <div class="dugme">
-            <el-button @click="potvrdiUnos" type="success" icon="el-icon-check" circle style="color: white; border-color:rgba(111, 201, 37, 0.925); background-color:rgba(111, 201, 37, 0.925);"></el-button>
-            <el-button @click="ponistiUnos" type="success" icon="el-icon-close" circle style="color: white; border-color:rgba(213, 34, 92, 0.925); background-color:rgba(213, 34, 92, 0.925);"></el-button>
+            <el-button @click="potvrdiUnos" type="success" icon="el-icon-check" circle>Potvrdi</el-button>
+            <el-button @click="ponistiUnos" type="danger" icon="el-icon-close" circle>Poništi</el-button>
         </div>
     </div>
 </template>
@@ -23,7 +23,7 @@
 import {} from 'element-ui'
 import { apiFetch, destinationUrl } from '../../../services/authFetch';
 import { getUserInfo } from '../../../services/contextManagement';
-import { ERRORS} from "../../../data/errorsCode.js";
+// import { ERRORS} from "../../../data/errorsCode.js";
     export default {
         data(){
             return{
@@ -54,22 +54,19 @@ import { ERRORS} from "../../../data/errorsCode.js";
             },
             potvrdiUnos: function(){
                 if(this.validacijaPassworda()){
-                    apiFetch('POST', destinationUrl + "/user/edit", {
-                        UserId: getUserInfo().userID,
-                        OldPassword: this.oldPass,
-                        NewPassword: this.newPass
-                    }).then(result => {
-                        if(result.Success) {
+                    let data = {
+                        userId: getUserInfo().userID,
+                        oldPass: this.oldPass,
+                        newPass: this.newPass
+                    }
+                    console.log(data)
+                    apiFetch('PUT', destinationUrl + "/user/edit", data)
+                    .then(result => {
+                            console.log(result)
                             this.$message({message: "Uspesno ste promenili lozinku", type: "success"});
                             this.clearFormFilds();
                             this.$emit("closeChangePasswordForm");
-                        }
-                        else if(result.Errors != null) {
-                            result.Errors.forEach(error => this.$message({
-                                message: ERRORS[error.Code],
-                                type: "warning"
-                            }));
-                        }
+                        
                     });
                 }
             },
