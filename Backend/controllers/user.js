@@ -7,6 +7,7 @@ exports.getUsers = async (req, res) => {
   try {
     const users = await User.find()
     Data = {name: users.name, lastname: users.lastname, usertype: users.usertype, username: users.username}
+
     res.status(200)
       .json({ message: 'Prikupljeni korisnici', Data: users })
   }
@@ -59,17 +60,22 @@ exports.updateUser = async (req, res, next) => {
     return res.status(400).send(error.details[0].message);
   const salt = await bcryptjs.genSalt(10);
 
-  const user = await User.findById(req.body.userId)
-  const oldPass = req.body.oldPass
-  const newPass = req.body.newPass
-
-  const goodPassword = controller.checkPassword(oldPass, user.password)
-  if (goodPassword) {
-    const hashedPw = await bcryptjs.hash(req.body.newPass, salt);
-    user.password = hashedPw
-  }
   try {
-    const savedUser = await user.save()
+    const user = await User.findById(req.body.userId)
+    const oldPass = req.body.oldPass
+    const newPass = req.body.newPass
+
+    const goodPassword = controller.checkPassword(oldPass, user.password)
+    if (goodPassword) {
+      const hashedPw = await bcryptjs.hash(req.body.newPass, salt);
+      //user.password = hashedPw
+      var myquery = { _id: req.body.userId };
+      var newvalues = { $set: { password: hashedPw } };
+      const savedUser = await User.updateOne(myquery, newvalues, function(err, res) {
+        if (err) throw err;
+        console.log("1 document updated");
+      });
+    }
     res.json({ Success: true });
   }
   catch (err) {
