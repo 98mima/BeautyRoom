@@ -3,9 +3,14 @@
         <el-form class="zakazi-forma">
             <div class="stavka">
                 <label>Datum:</label>
-                <el-input
+                <el-date-picker
+      v-model="value1"
+      type="date"
+      placeholder="Pick a day">
+    </el-date-picker>
+             <!--   <el-input
                     :disabled="false" :value="this.date" readonly
-                    v-model="this.date" placeholder="Datum iz kalendara">{}</el-input>
+                    v-model="this.date" placeholder="Datum iz kalendara">{}</el-input>-->
             </div>
             <div class="stavka">
                 <label>Dodatni zahtevi:</label>
@@ -37,6 +42,7 @@ import { ERRORS } from '../../data/errorsCode';
 export default {
     data(){
         return{
+            value1:'',
             podaciZakazi: {
                 Location: '',
                 Date: '',
