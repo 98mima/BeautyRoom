@@ -26,7 +26,6 @@ exports.addComment = async (req, res, next) => {
             productid: product._id,
             korisnikid: req.body.korisnikid
         });
-        console.log(product)
         const savedComm = await comment.save()
         res.json({ Success: true, savedComm });
         return product.addComment(comment)
