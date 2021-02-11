@@ -31,4 +31,14 @@ const productSchema = new Schema({
     }
 });
 
+productSchema.methods.addComment = function(comment) {
+    const updatedcommlist = [...this.listofcomments.comments];
+    updatedcommlist.push({content: comment.content});
+
+    updatedlist = {
+        comments: updatedcommlist
+    };
+    this.listofcomments = updatedlist
+    return this.save();
+}
 module.exports = mongoose.model('Product', productSchema);
