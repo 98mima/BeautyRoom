@@ -1,0 +1,49 @@
+<template>
+    <div class="korpa-container">
+        <h3 style="color:rgba(213, 34, 92, 0.979);">Sadržaj narudžbine</h3>
+        <el-table :data="this.korpa" height="250" style="width:80%; border:1p solid black;" border>
+            <el-table-column prop="product.title" label="Naziv" class="table-column" min-width="110" sortable></el-table-column>
+            <!-- <el-table-column prop="ProductType" label="Tip" class="table-column" min-width="100"></el-table-column> -->
+            <el-table-column prop="quantity" label="Količina" class="table-column" min-width="90"></el-table-column>
+            <el-table-column prop="product.price" label="Cena" class="table-column" min-width="100"></el-table-column>
+        </el-table>
+    </div>
+</template>
+
+<script>
+import { getUserInfo } from '../../services/contextManagement';
+import { REGULAR_USER_TYPE } from '../../services/authFetch';
+export default {
+    data(){
+        return{
+            uprava:''
+        }
+    },
+    beforeMount: function() {
+        if(getUserInfo().userType == REGULAR_USER_TYPE){
+            this.uprava = false;
+        }
+        else{
+            this.uprava = true;
+        }
+    },
+    props: ['korpa']
+}
+</script>
+
+<style scoped>
+.korpa-container{
+        height: 47%;
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        opacity: 1;
+        padding: 1em;
+        justify-content: center;
+        align-items: center;
+}
+h3{
+    text-align: center;
+    font-family: sans-serif;
+}
+</style>

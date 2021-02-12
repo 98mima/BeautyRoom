@@ -1,0 +1,185 @@
+<template>
+    <div class="narudzbina-container">
+        <div class="narudzbina-tabela1">
+            <h3 style="color:rgba(213, 34, 92, 0.979);">Lista narudžbina</h3>
+            <el-table :data="listaNarudzbina" height="250" border
+                style="width:100%" highlight-current-row @row-click="handleCurrentChange">
+                <el-table-column min-width="100" prop="date" label="Datum"></el-table-column>
+                <el-table-column min-width="150" prop="status" label="Status"></el-table-column>
+                <el-table-column min-width="220" prop="address" label="Adresa"></el-table-column>
+                <el-table-column min-width="140" prop="number" label="Telefon"></el-table-column>
+                <el-table-column min-width="140" prop="price" label="Ukupna cena"></el-table-column>
+                <el-table-column width="125">
+                    <template slot-scope="scope">
+                        <div class="kolonaDugmici-1">
+                            <el-button 
+                                type="info" icon="el-icon-message" 
+                                circle size="mini" 
+                                @click="dodajPoruku(scope.$index)">
+                            </el-button>
+                            <el-button 
+                                type="success" 
+                                icon="el-icon-success" circle size="mini" 
+                                @click="updateOrderStatus(scope.$index,1)">
+                            </el-button>
+                            <el-button 
+                                type="danger" icon="el-icon-error" 
+                                circle size="mini" 
+                                @click="updateOrderStatus(scope.$index,2)">
+                            </el-button>
+                        </div>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </div>
+        <prikaz-korpe :korpa="itemsinCart"></prikaz-korpe>
+        <obavesti-korisnika v-if="this.showComp == 'obavestenje'" @zatvoriPoruku="zatvori" @proslediPoruku="prosledi($event)"></obavesti-korisnika>
+    </div>
+</template>
+
+<script>
+// const Status=['Obrađena','Odbijena','Na čekanju'];
+import PrikazKorpe from "./prikazi/PrikazKorpe"
+import ObavestiKorisnika from "./ObavestiKorisnika.vue"
+import { destinationUrl, apiFetch } from '../services/authFetch';
+import {sortOrdersByDate} from "../services/sort.js";
+// import { REJECTED_REQUEST_MESSAGE } from '../data/constants';
+export default {
+    components:{PrikazKorpe,ObavestiKorisnika},
+    data(){
+        return{
+            listaNarudzbina:'',
+            currentRow:null,
+            itemsinCart:[],
+            showComp:'',
+            selectedIndex:'',
+        }
+    },
+    methods: {
+        loadOrders(){
+            fetch(destinationUrl+'/shop/getUnresolvedOrders', {method:"GET"})
+                .then(response=> response.ok ? response.json() : new Error())
+                .then(result => {
+                    this.listaNarudzbina=result.Data;
+                    this.sortiraj();
+                })
+        },
+        handleCurrentChange(value){
+            this.currentRow=value;
+            this.itemsinCart=this.currentRow.products;
+        },
+        sortiraj(){
+            this.listaNarudzbina = sortOrdersByDate(this.listaNarudzbina);
+        },
+        dodajPoruku(index){
+            this.showComp='obavestenje';
+            this.selectedIndex=index;
+            
+        },
+        zatvori(){
+            this.showComp='';
+            this.selectedIndex='';
+        },
+        prosledi(prosledjenoObavestenje){
+            // console.log(this.listaNarudzbina[this.selectedIndex]);
+
+             let Data = {ordId: '', notification: ''};
+                Data.ordId = this.listaNarudzbina[this.selectedIndex]._id
+                Data.notification = prosledjenoObavestenje
+                console.log(Data);
+            apiFetch('PUT', destinationUrl + "/shop/updateOrderNotification", Data)
+                .then(result =>{
+                    if(result.Success)
+                    {
+                        console.log(result);
+                        // console.log(this.listaNarudzbina[this.selectedIndex])
+                        // this.listaNarudzbina[this.selectedIndex].notification = prosledjenoObavestenje;
+                        // this.$emit("proslediPoruku", this.notification);
+                        this.$message({message: "Uspešno ste dodali notifikaciju.", type: 'success'});
+                    }
+                    else
+                         this.$message({message: "Notifikacija nije dodata.", type: 'error'});
+                }).catch(error=>console.log(error));
+            this.showComp='';
+            this.selectedIndex='';
+        },
+        updateOrderStatus(index,vrednost){
+            // const formData = new FormData();
+            // formData.append('ordId', this.listaNarudzbina[index].orders._id);
+            // formData.append('vrednost', vrednost);
+            console.log(this.listaNarudzbina[index])
+               let Data = {ordId: '', vrednost: ''};
+                Data.ordId = this.listaNarudzbina[index]._id
+                Data.vrednost = vrednost
+                console.log(Data)
+
+            apiFetch('PUT', destinationUrl + "/shop/updateOrderState", Data)
+            // fetch(destinationUrl + "/order/updateOrderState", {method:'PUT', body:formData})
+                // .then(response=> response.ok ? response.json() : new Error())
+                .then(result=>{
+                    if(result.Success){
+                        // this.$set(this.listaNarudzbina[index].Order, 'RequestStatus', Status[vrednost - 1]);
+                        // this.sortiraj();
+                    this.listaNarudzbina.splice(index, 1);
+                    this.itemsinCart = [];
+                    if(vrednost == 1){
+                        this.$message({message: "Uspešno ste potvrdili narudžbinu.", type: 'success'})
+                    }
+                    else if (vrednost == 2){
+                        this.$message({message: "Uspešno ste odbili narudžbinu.", type: 'success'})
+                    }}
+                    else this.$message({message: "Doslo je do greske!", type: "error"});
+                    }).catch(error => console.log(error));
+        }
+    },
+    mounted:function(){
+        this.loadOrders();
+    }
+}
+</script>
+
+<style>
+.narudzbina-container{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+}
+.narudzbina-tabela1{
+    height: 47%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+    padding: 1em 1em 0em 1em;
+}
+.el-table .success-row {
+    background: #dff5d3;
+    color: green;
+}
+
+.el-table .odHold-row{
+    background: oldlace;
+    color: orange;
+}
+
+.el-table .rejected-row{
+    background: rgb(245, 217, 217);
+    color: red
+}
+
+.kolonaDugmici-1{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+h3{
+    text-align: center;
+    font-family: sans-serif;
+}
+</style>
