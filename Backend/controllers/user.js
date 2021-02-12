@@ -6,10 +6,11 @@ const controller = require('../controllers/auth')
 exports.getUsers = async (req, res) => {
   try {
     const users = await User.find()
+    const count = await User.find().countDocuments()
     Data = {name: users.name, lastname: users.lastname, usertype: users.usertype, username: users.username}
-
+    
     res.status(200)
-      .json({ message: 'Prikupljeni korisnici', Data: users })
+      .json({ message: 'Prikupljeni korisnici', Data: users, count: count })
   }
   catch (err) {
     res.json({ success: false });
@@ -68,7 +69,6 @@ exports.updateUser = async (req, res, next) => {
     const goodPassword = controller.checkPassword(oldPass, user.password)
     if (goodPassword) {
       const hashedPw = await bcryptjs.hash(req.body.newPass, salt);
-      //user.password = hashedPw
       var myquery = { _id: req.body.userId };
       var newvalues = { $set: { password: hashedPw } };
       const savedUser = await User.updateOne(myquery, newvalues, function(err, res) {

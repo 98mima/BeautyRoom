@@ -17,7 +17,7 @@
                         </div>
                         <div class="part3">
                             <h6 id="cena">Cena: {{item.price}}din</h6>
-                            <el-button id="dugmeDodaj" type="success" round size="medium" style="color: white; border-color:rgba(24, 102, 89, 0.925); background-color:rgba(24, 102, 89, 0.925);" @click="onClickDodajUKorpu(index)">Dodaj u korpu</el-button>
+                            <el-button id="dugmeDodaj" type="success" round size="medium" style="color: white; border-color:rgba(213, 34, 92, 0.925); background-color:rgba(213, 34, 92, 0.925);" @click="onClickDodajUKorpu(index)">Kupi</el-button>
                             <!-- <el-button type="text" @click="formaDodavanje = true" style="color:rgba(24, 102, 89, 0.925);" class="dugme-za-dodavanje">Komentari
                             </el-button> 
                             <el-button type="text" @click="formaDodaj = true" style="color:rgba(24, 102, 89, 0.925);" class="dugme-za-dodavanje">Dodaj komentar</el-button>                           
@@ -161,7 +161,7 @@ export default {
 }
 .prikaz-proizvoda-container{
     height: 290px;
-    width: 75%;
+    width: 700px;
     background: linear-gradient(0deg, #bccecfc7, #fcfcfcab );
     margin-top: 15px;
     border-radius: 3px;
