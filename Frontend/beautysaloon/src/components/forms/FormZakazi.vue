@@ -10,7 +10,7 @@
              <div class="stavka">
                 <el-date-picker
                 :value="this.date"
-                v-model="value1"
+                v-model="podaciZakazi.date"
                 type="date"
                 placeholder="Izaberite datum">
                 </el-date-picker>
@@ -45,7 +45,7 @@ import { apiFetch, destinationUrl } from '../../services/authFetch';
 export default {
     data(){
         return{
-            value1:'',
+           // value1:'',
             podaciZakazi: {
                 date: '',
                 comment: '',
@@ -80,7 +80,7 @@ export default {
     },
     methods: {
         validacija() {
-            if(this.podaciZakazi.value1 == '' || this.podaciZakazi.type == '' || this.podaciZakazi.time == ''){
+            if(this.podaciZakazi.date == '' || this.podaciZakazi.type == '' || this.podaciZakazi.time == ''){
                 this.$message({message: "Morate popuniti sva polja!", type: 'warning'})
                 return false
             }
@@ -90,7 +90,7 @@ export default {
              if(!this.validacija())
                  return
 
-            this.podaciZakazi.date = this.date;
+            //this.podaciZakazi.date = this.date;
             // this.podaciZakazi.name = this.user.name;
             // this.podaciZakazi.lastname = this.user.lastname;
             this.podaciZakazi.korisnikid = getUserInfo().userID;
