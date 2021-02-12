@@ -5,8 +5,7 @@
                 <user-profile-info-page v-if="this.showComp == 'profil'" />
                 <user-requests v-if="this.showComp == 'zakazivanja'" />
                 <narudzbine-korisnik v-if="this.showComp == 'narudzbine'"/>
-                <utisak-o-proizvodu v-if="showComp == 'utisci'"></utisak-o-proizvodu>
-
+                <utisak-o-proizvodu idKorisnika="korisnikid" v-if="showComp == 'utisci'"></utisak-o-proizvodu>
              </div>
         </div>
 </template>
