@@ -108,12 +108,12 @@ export default {
                 Data.date = this.currentRow.date;
                 Data.time = this.currentRow.time;
                 Data.comment = this.currentRow.comment;
-                Data.requestId = this.currentRow._id;
+                Data.reqId = this.currentRow._id;
                 Data.type = this.currentRow.type;
                 // Data.notification = this.notification;
                 Data.numberKorisnika = this.currentRow.numberKor;
                 console.log(this.currentRow)
-                apiFetch('POST', destinationUrl + "/task/assign", Data)
+                apiFetch('PUT', destinationUrl + "/request/acceptRequest", Data)
                     .then(result=>{
                         if(result.Success){
                             this.$message({message: "Uspešno dodeljivanje obaveze", type:'success'})

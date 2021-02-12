@@ -6,7 +6,7 @@ const { date } = require('@hapi/joi');
 
 exports.getProducts = async (req, res, next) => {
   try {
-    const prod = await Product.find()//find vraca proizvod a ne kursor
+    const prod = await Product.find().sort({"title": 1})
     res.status(200)
       .json({ message: 'Prikupljeni proizvodi', Data: prod })
   }

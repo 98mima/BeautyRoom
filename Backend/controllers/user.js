@@ -5,7 +5,7 @@ const controller = require('../controllers/auth')
 
 exports.getUsers = async (req, res) => {
   try {
-    const users = await User.find()
+    const users = await User.find().sort({"lastname": 1})
     const count = await User.find().countDocuments()
     Data = {name: users.name, lastname: users.lastname, usertype: users.usertype, username: users.username}
     

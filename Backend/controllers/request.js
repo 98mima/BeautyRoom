@@ -58,26 +58,28 @@ exports.addRequest = async (req, res, next) => {
 
 exports.rejectRequest = async (req, res, next) => {
   try {
-    const request = await Request.findById(req.body.reqId)//fja mongoosa
-    console.log(request)
-    request.status="odbijen";
+    var myquery = { _id: req.body.reqId };
+    var newvalues = { $set: { status: "odbijen" } };
+    const savedReq = await Request.updateOne(myquery, newvalues, function(err, res) {
+      if (err) throw err;
+      console.log("1 document updated");
+    })
     res.json({ Success: true });
-    return request.save()
   }
   catch (err) {
     res.json({ Success: false, message:err });
   }
 } 
 
-exports.updateRequestNotification = async (req, res, next) => {
+exports.acceptRequest = async (req, res, next) => {
   try {
-    const request = await Request.findById(req.body.reqId);
-
-    const poruka = req.body.notification;
-    request.notification = poruka;
-    res.status(200)
-      .json({ Success: true })
-    return order.save()
+    var myquery = { _id: req.body.reqId };
+    var newvalues = { $set: { status: "potvrdjen" } };
+    const savedReq = await Request.updateOne(myquery, newvalues, function(err, res) {
+      if (err) throw err;
+      console.log("1 document updated");
+    })
+    res.json({ Success: true });
   }
   catch (err) {
     res.json({ Success: false });
