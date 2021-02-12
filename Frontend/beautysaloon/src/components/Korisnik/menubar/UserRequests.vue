@@ -6,8 +6,7 @@
         :data="this.listaZahteva"
         :default-sort="{prop:'Date', order:'ascending'}"
         style="font-size:21px; font-family:Helvetica Neue; width:100%;"
-        height="250"
-      >  
+        height="250">  
         <el-table-column prop="date" label="Datum" class="table-column" sortable width="300"></el-table-column>
         <el-table-column prop="time" label="Vreme" class="table-column" width="300"></el-table-column>
         <el-table-column prop="type" label="Tip" class="table-column" width="300"></el-table-column>

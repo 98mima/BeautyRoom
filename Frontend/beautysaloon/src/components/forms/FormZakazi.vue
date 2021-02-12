@@ -12,7 +12,7 @@
                 :value="this.date"
                 v-model="value1"
                 type="date"
-                placeholder="Pick a day">
+                placeholder="Izaberite datum">
                 </el-date-picker>
             </div>
             <div class="stavka">
@@ -80,7 +80,7 @@ export default {
     },
     methods: {
         validacija() {
-            if(this.podaciZakazi.date == '' || this.podaciZakazi.type == '' || this.podaciZakazi.time == ''){
+            if(this.podaciZakazi.value1 == '' || this.podaciZakazi.type == '' || this.podaciZakazi.time == ''){
                 this.$message({message: "Morate popuniti sva polja!", type: 'warning'})
                 return false
             }
