@@ -7,13 +7,13 @@
                     <img :src="Logo" style="height:130px; width: 170px; margin: 0 auto; display:flex; justify-self: center;" slot="reference"/> 
                     </el-popover>
                     <div class="stavka">
-                        <label>Naziv ustanove:</label>
+                        <label>Ime:</label>
                         <el-input class="input" v-model="signupData.name" >
                             <i class="el-icon-edit el-input__icon" slot="suffix"></i>
                         </el-input>
                     </div>
                     <div class="stavka">
-                        <label>Ovlašćeni:</label>
+                        <label>Prezime:</label>
                         <el-input class="input" v-model="signupData.lastname">
                              <i class="el-icon-edit el-input__icon" slot="suffix"></i>
                         </el-input>
