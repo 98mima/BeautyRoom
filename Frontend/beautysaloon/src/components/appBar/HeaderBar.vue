@@ -19,19 +19,21 @@
                         <el-button type="primary" @click="logovanje()" style="border-color:rgba(213, 34, 92, 0.925); background-color:rgba(213, 34, 92, 0.925);" round> Prijavi se 
                     </el-button> </li>
                     <li v-if="this.type == REGULAR_USER_TYPE">
-                        <el-button type="primary" @click="signOut()">Odjava
-                    </el-button> </li>
+                        <el-button round size="small" style="margin-right:5px; color:white; background-color: rgba(213, 34, 92, 0.925); border-color:rgba(213, 34, 92, 0.925);" @click="signOut()">
+                            <el-icon class="el-icon-switch-button"></el-icon>
+                        </el-button> 
+                    </li>
                     <li v-if="this.type == ANONYMOUS_USER_TYPE"> 
                         <el-button type="primary" class="dugme" @click="Signup()" style="border-color:rgba(213, 34, 92, 0.925); background-color:rgba(213, 34, 92, 0.925);" round>Registruj se
                     </el-button></li>
                     <li v-if="this.type == REGULAR_USER_TYPE" @click="emitMenuSelect('korpa')">
-                        <el-button type="primary" class="dugme" @click="$emit('signup')" plain >
+                        <el-button round size="small" style="color: rgba(213, 34, 92, 0.925); border-color:white; background-color:white;" class="dugme" @click="$emit('signup')" plain >
                             <el-icon class="el-icon-shopping-cart-2"></el-icon>
                         </el-button> 
                     </li>
                     <li v-if="this.type == REGULAR_USER_TYPE" @click="emitMenuSelect('profil')"> 
-                        <el-button type="primary" class="dugme" @click="$emit('signup')" plain >
-                            <el-icon class="el-icon-user-solid"></el-icon>
+                        <el-button round size="small" style="color: rgba(213, 34, 92, 0.925); border-color:white; background-color:white;" class="dugme" @click="$emit('signup')" plain >
+                            <el-icon class="el-icon-more"></el-icon>
                         </el-button> 
                     </li>
                 </ul>
