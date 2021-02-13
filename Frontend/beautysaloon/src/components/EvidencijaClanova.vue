@@ -2,7 +2,10 @@
     <div class="evidencija-clanova-container">
         <div class="evidencija-clanova">
             <filter-clanova hidden></filter-clanova>
-            <label class="labela1">Evidencija članova</label>
+            <div class="naziv">
+                <label class="labela1">Evidencija članova</label>
+                <label class="labela2" >Ukupan broj korisnika: {{users.count}}</label>
+            </div>
             <el-table style="width:100%" height="250" :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))">
                 <el-table-column prop="name" label="Ime" class="table-column"></el-table-column>
                 <el-table-column prop="lastname" label="Prezime" class="table-column"></el-table-column>
@@ -38,7 +41,8 @@ export default {
             search:'',
             employedUserType:EMPLOYED_USER_TYPE,
             userTypes:UserTypes,
-            user:''
+            user:'',
+            users:{count: ''}
         }
     },
     methods:{
@@ -52,6 +56,12 @@ export default {
                     }
                 }).catch(error=>{console.log(error);})
         },
+        UkBrKorisnika(){
+                apiFetch('GET', destinationUrl + "/user/users")
+                    .then(result => {
+                        this.users.count=result.count;
+                    });
+            },
         zavrsiDodavanje(){
             this.showComp='';
             this.loadDataTable();
@@ -68,17 +78,7 @@ export default {
         },
         setUser(event){
             this.user=event;
-
-            if(this.user==UserTypes[EMPLOYED_USER_TYPE]){
-                apiFetch('GET', destinationUrl+"/user/getAllEmployed")
-                    .then(result=>{
-                        this.tableData=result.Data;
-                        this.tableData.forEach((data,index)=>{
-                            data.usertype = UserTypes[result.Data[index].usertype];
-                    });
-                    });
-            }
-            else if(this.user==UserTypes[REGULAR_USER_TYPE]){
+            if(this.user==UserTypes[REGULAR_USER_TYPE]){
                 apiFetch('GET', destinationUrl + "/user/getAllRegularUsers")
                         .then(result => {
                             this.tableData=result.Data;
@@ -97,19 +97,10 @@ export default {
                     });
             }
         },
-        // handleResponse(result){
-        //     if(result.Success){
-        //         this.tableData=result.Data;
-        //         this.tableData.forEach((data,index)=>{
-        //             data.usertype = UserTypes[result.Data[index].usertype];
-        //         });
-        //     }
-        //     else
-        //         this.$message({message: "Došlo je do greške!", type: 'error'})
-        // }
     },
     mounted:function(){
         this.$emit('loadDataTable');
+        this.UkBrKorisnika();
     },
     created(){
         this.$on('loadDataTable', this.loadDataTable);
@@ -147,9 +138,16 @@ export default {
     font-family: cursive;
     font-size:25px;
     justify-content: center;
-    align-item:center;
+    align-items:center;
     color:rgba(213, 34, 92, 0.979);
-}
+    }
+    .labela2{
+    text-align: center;
+    font-family: cursive;
+    font-size:15px;
+    justify-content:flex-end;
+    align-items:flex-end;
+    }
     
     @media screen and (max-width: 700px) {
         .evidencija-clanova {

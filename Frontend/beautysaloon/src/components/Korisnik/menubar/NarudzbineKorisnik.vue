@@ -1,14 +1,14 @@
 <template>
     <div class="narudzbina-container">
         <div class="narudzbina-container-table">
-            <h3>Lista narudžbina</h3>
+            <h3 style="color:rgba(213, 34, 92, 0.979);">Lista narudžbina</h3>
             <el-table
                 :data="this.listaNarudzbina"
                 height="250"
                 style="width:100%"
                 :row-class-name="tableRowClassName"
                 highlight-current-row
-                @row-click="handleCurrentChange">
+                @row-click="handleCurrentChange" border>
                 <el-table-column min-width="20%" prop="date" label="Datum" sortable></el-table-column>
                 <el-table-column min-width="20%" prop="address" label="Adresa"></el-table-column>
                 <el-table-column min-width="20%" prop="price" label="Ukupna cena (din)"></el-table-column>
@@ -104,7 +104,6 @@ export default {
         width: 90%;
         display: flex;
         flex-direction: column;
-        background-color: rgba(249, 227, 254, 0.986);
         opacity: 1;
         padding: 1em 1em 0em 1em;
     }
