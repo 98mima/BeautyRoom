@@ -9,7 +9,7 @@
             </div> -->
              <div class="stavka">
                 <el-date-picker
-                :value="this.date"
+                :value="this.date.substring(0, 10)"
                 v-model="podaciZakazi.date"
                 type="date"
                 placeholder="Izaberite datum">
@@ -75,7 +75,8 @@ export default {
     props: {date:String},
     watch: {
         date: function(pom){
-            this.podaciZakazi.date=pom;
+            this.podaciZakazi.date=pom.substring(0, 10);
+            // console.log(pom);
         }
     },
     methods: {
@@ -90,15 +91,14 @@ export default {
              if(!this.validacija())
                  return
 
-            //this.podaciZakazi.date = this.date;
+            // this.podaciZakazi.date = this.date.substring(0, 10);
             // this.podaciZakazi.name = this.user.name;
             // this.podaciZakazi.lastname = this.user.lastname;
             this.podaciZakazi.korisnikid = getUserInfo().userID;
-                console.log(this.podaciZakazi)
+                // console.log(this.podaciZakazi)
 
             apiFetch('POST', destinationUrl + "/request/add/", this.podaciZakazi)
             .then(result => {
-                console.log("mima")
                 if(result.Success){
                     this.$message({message: "Uspesno ste zakazali termin.", type: 'success'});
                     this.$emit("zakazano",this.podaciZakazi);
@@ -133,6 +133,7 @@ export default {
         }
     },
     beforeMount(){
+        // this.radi(date);
         this.pribaviKorisnika()
     }
 }

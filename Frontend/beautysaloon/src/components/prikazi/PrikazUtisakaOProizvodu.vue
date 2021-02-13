@@ -36,7 +36,7 @@ export default {
     components: { CustomBar, Card, Button, Icon, Pagination},
     data(){
         return{
-            korisnikAutor:this.idKorisnik,
+            korisnikAutor:this.korisnikid,
             ukupanBrojUtisaka:this.brojUtisaka,
             utisci:this.utisciZaPrikaz
         }
@@ -49,7 +49,7 @@ export default {
             this.$emit('brisanjeUtiska',event)
         }
     },
-    props:["utisciZaPrikaz", "brojUtisaka", "idKorisnik", "trenutnaStrana"],
+    props:["utisciZaPrikaz", "brojUtisaka", "korisnikid", "trenutnaStrana"],
     watch:{
         utisciZaPrikaz: function(pom){
             this.utisci=pom;

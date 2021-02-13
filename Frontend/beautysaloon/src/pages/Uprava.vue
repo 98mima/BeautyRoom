@@ -37,12 +37,6 @@ export default {
                     index: 'narudzbina',
                     slika: 'narudzbine.png'
                 },
-                // {
-                //     key: 3,
-                //     label: 'Utisci',
-                //     index: 'utisakuprave',
-                //     slika: 'utisak.png'
-                // },
                 {
                     key: 3,
                     label: 'Proizvodi',
@@ -63,7 +57,7 @@ export default {
     },
     methods: {
         setComponent(index){
-            this.showComp = index
+            this.showComp = index;
             setPageShown(index);
         }
     },
@@ -73,10 +67,10 @@ export default {
         var index = getPageToShow().page;
         console.log(index)
         if(index != null){
-            this.showComp = index
+            this.showComp = index;
             return
         }
-        this.showComp = ''
+        this.showComp = '';
     }
 }
 </script>

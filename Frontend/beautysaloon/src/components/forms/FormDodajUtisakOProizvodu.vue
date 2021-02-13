@@ -7,9 +7,15 @@
             </el-popover>
             <h5>Dodaj utisak o proizvodu</h5>
             <div>
+                <label>Proizvod</label>
+               <el-select class="inputPolje" v-model="proizvodID" placeholder="Izaberite proizvod" size="medium">
+                    <el-option v-for="item in proizvodi" :key="item._id" :label="item.title" :value="item.title"></el-option>
+                </el-select>
+            </div>
+            <!-- <div>
             <label>Proizvod:</label>
                 <el-input v-model="data.nameProduct"></el-input>
-            </div>
+            </div> -->
             <label class="form-line">Komentar:</label>
             <el-input type="textarea" v-model="data.content" :rows="10"></el-input>
             <div class="dugme">
@@ -35,31 +41,53 @@ export default {
                 content: '',
                 korisnikid:'',
                 // productid:''
-            }
-
+            },
+            proizvodi:[],
+            proizvodID:''
         }
     },
     props: ['openDialog'],
     methods: {
         potvrdiUnos(){
             this.data.korisnikid = getUserInfo().userID;       
-            console.log(this.data);
-
+            console.log(this.proizvodID);
+            this.data.nameProduct = this.proizvodID
+        //    if(this.proizvodID != ''){
+        //         let proizvodi = {content:'', nameProduct: '', productid:'', korisnikid:''};
+        //         proizvodi.nameProduct = this.nameProduct;
+        //         proizvodi.productid = this.productid;
+        //         console.log(proizvodi.nameProduct);
+        //    }
+           
             apiFetch('POST', destinationUrl + "/comment/add", this.data)
                 .then(response => {
                     console.log(response);
                     if(response.Success)
+                    {
+                        this.proizvodID='';
                         this.$message('Dodali ste utisak!');
+                    }
                     else{
                         this.$message('Doslo je do greske! Ili proizvod ne postoji!');
                 }
 
                     }).catch(err => console.log(err));
                  this.openDialog = false;
-            }
+            },
+        ListaProizvoda()
+        {
+            apiFetch('GET', destinationUrl + "/comment/all")
+                .then(result=>{
+                    this.proizvodi=result.products;
+                    // console.log(this.proizvod.products);
+                });
+        }
         // ponisti: function () {
         //     this.$emit("zavrsenaPromena",'cancel');
         // }
+    },
+    mounted:function(){
+        this.ListaProizvoda();
     }
 }
 </script>
