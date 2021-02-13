@@ -1,7 +1,9 @@
 <template>
     <div class="menu-container">
         <div class="header-bar" text-color="white">
-            <div class="naslov"><h3 style="color:rgba(213, 34, 92, 0.938); margin-top:5px; font-family:Georgia, 'Times New Roman', Times, serif; font-size:30px;"> Beauty Room </h3> </div>
+            <div class="naslov">
+                <h3 style="color:rgba(213, 34, 92, 0.938); margin-top:5px; font-family:Georgia, 'Times New Roman', Times, serif; font-size:30px;"> Beauty Room </h3> 
+            </div>
             <div class="top-menu-button-container">
                 <el-button type="info" round size="small" class="top-menu-button" @click="zatvoriMeni"  style="color: rgba(213, 34, 92, 0.925); border-color:white; background-color:white;">
                     <el-icon class="el-icon-more"></el-icon>
