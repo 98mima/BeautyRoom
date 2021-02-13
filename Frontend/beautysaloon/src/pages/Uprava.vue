@@ -3,7 +3,6 @@
         <custom-bar :list="menuItems" @changeView="setComponent($event)" >
             <evidencija-clanova v-if="this.showComp == 'evidencijaclanova'"></evidencija-clanova>
             <narudzbina v-if="this.showComp == 'narudzbina'"></narudzbina>
-            <!-- <utisak-uprave v-if="this.showComp == 'utisakuprave'"></utisak-uprave> -->
             <zakazivanja v-if="this.showComp == 'zakazivanja'" ></zakazivanja>
             <proizvodi-uprave v-if="this.showComp == 'proizvodiuprave'"></proizvodi-uprave>
        </custom-bar>
@@ -11,11 +10,9 @@
 </template>
 
 <script>
-//import PrikazObaveza from "../components/prikazi/PrikazObaveza.vue"
 import CustomBar from "../components/CustomBar"
 import EvidencijaClanova from "../components/EvidencijaClanova.vue"
 import Narudzbina from "../components/Narudzbina.vue"
-// import UtisakUprave from "../components/UtisakUprave.vue"
 import Zakazivanja from "../components/Zakazivanja.vue"
 import ProizvodiUprave from "../components/ProizvodiUprave.vue"
 import {setPageShown, getPageToShow, getUserInfo } from "../services/contextManagement"
