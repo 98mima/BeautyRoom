@@ -120,12 +120,12 @@ export default {
     padding-bottom: 0.3em;
 }
 .body-container{
-    justify-content: center;
+    /* justify-content: center; */
     height: 100%;
     padding-top: 56px;
     width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     position: absolute;
 }
 .side-menu{
