@@ -176,9 +176,6 @@ export default {
         border-radius: 6px;
     }
     @media screen and (max-width: 995px){
-        .header-container{
-            height: auto;
-        }
         .container{
             flex-direction: column;
             height: 100%;

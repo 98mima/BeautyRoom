@@ -14,13 +14,20 @@
         <div class="body-container">
             <transition name="el-zoom-in-center">
             <div class="side-menu" v-if="this.menuShown">
-                <el-menu style="height:100%; font-family:sans-serif; 
+                <el-menu style="width:100%; background: linear-gradient(0deg, rgba(39, 160, 150, 0.938), rgba(111, 201, 37, 0.979) );"
+                class="el-menu-demo"
+                mode="horizontal"
+                @select="emitMenuSelect($event)"
+                text-color="white"
+                active-text-color="rgba(144, 225, 240, 0.938)">
+     <!--           <el-menu style="width:100%; font-family:sans-serif; 
                          background:  linear-gradient(0deg, rgba(196, 238, 162, 0.938), rgba(111, 201, 37, 0.979) );  font-size:20px;"
                     background-color="rgba(52, 211, 198, 0.986)"
-                    mode="vertical"
+                    :default-active="activeIndex2"
+                    mode="horizontal"
                     text-color="white" 
                     active-text-color="rgba(144, 225, 240, 0.938)"
-                    @select="emitMenuSelect($event)" :router="false">
+                    @select="emitMenuSelect($event)" :router="false"> -->
                     <el-menu-item v-for="item in itemList" :key="item.key" class="side-menu-item" :index="item.index"
                         style=" background: linear-gradient(0deg, rgba(39, 160, 150, 0.938), rgba(111, 201, 37, 0.979) );">
                        <img v-if="item.slika != undefined" style="height:30%; margin-right: 1em; margin-left:0.1em; position:left;
@@ -88,18 +95,18 @@ export default {
     padding-left: 2em;
 }
 .menu-container{
-    flex-direction: column;
-    height: 100%;
-}
-.header-bar{
-    width: 100%;
-    height: 56px;
     display: flex;
     flex-direction: column;
-    position: relative;
-    /*background-color: rgba(26, 104, 168, 0.904);*/
+    height: 100%;
+    width: 100%
+}
+.header-bar{
+    height: 56px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
     background: linear-gradient(0deg, rgba(111, 201, 37, 0.979),rgba(196, 238, 162, 0.938) );
-    /* font-family: Georgia, 'Times New Roman', Times, serif; */
 }
 .top-menu-button-container{
     display: flex;
@@ -113,16 +120,17 @@ export default {
     padding-bottom: 0.3em;
 }
 .body-container{
-    display: flex;
-    flex-direction: row;
-    height: calc(100% - 56px);
+    justify-content: center;
+    height: 100%;
+    padding-top: 56px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
     position: absolute;
-    flex-direction: row;
 }
 .side-menu{
-    height: 100%;
-    width: 14em;
+    height: 56px;
+    width: 100%;
      /*background-color: #2980c7d3;*/
 
 }

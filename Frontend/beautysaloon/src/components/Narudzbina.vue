@@ -12,11 +12,11 @@
                 <el-table-column width="125">
                     <template slot-scope="scope">
                         <div class="kolonaDugmici-1">
-                            <el-button 
+                            <!-- <el-button 
                                 type="info" icon="el-icon-message" 
                                 circle size="mini" 
                                 @click="dodajPoruku(scope.$index)">
-                            </el-button>
+                            </el-button> -->
                             <el-button 
                                 type="success" 
                                 icon="el-icon-success" circle size="mini" 
@@ -71,11 +71,11 @@ export default {
         sortiraj(){
             this.listaNarudzbina = sortOrdersByDate(this.listaNarudzbina);
         },
-        dodajPoruku(index){
-            this.showComp='obavestenje';
-            this.selectedIndex=index;
+        // dodajPoruku(index){
+        //     this.showComp='obavestenje';
+        //     this.selectedIndex=index;
             
-        },
+        // },
         zatvori(){
             this.showComp='';
             this.selectedIndex='';

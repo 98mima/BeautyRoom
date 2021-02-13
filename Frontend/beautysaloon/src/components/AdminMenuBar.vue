@@ -2,26 +2,27 @@
          <div class="profil-container">
              <side-bar-profil @changeView="setComponent($event)" :list="this.menuItems" />
              <div class="container">
-                <user-profile-info-page v-if="this.showComp == 'profil'" />
-                <user-requests v-if="this.showComp == 'zakazivanja'" />
-                <narudzbine-korisnik v-if="this.showComp == 'narudzbine'"/>
-                <utisak-o-proizvodu idKorisnika="korisnikid" v-if="showComp == 'utisci'"></utisak-o-proizvodu>
+               <evidencija-clanova v-if="this.showComp == 'evidencijaclanova'"></evidencija-clanova>
+                <narudzbina v-if="this.showComp == 'narudzbina'"></narudzbina>
+                <!-- <utisak-uprave v-if="this.showComp == 'utisakuprave'"></utisak-uprave> -->
+                <zakazivanja v-if="this.showComp == 'zakazivanja'" ></zakazivanja>
+                <proizvodi-uprave v-if="this.showComp == 'proizvodiuprave'"></proizvodi-uprave>
              </div>
         </div>
 </template>
 
 <script>
-import FooterBar from "../../appBar/FooterBar.vue";
-import SideBarProfil from "../../appBar/MenuBar.vue";
-import PromenaLozinke from "../../forms/FormPromeniLozinku.vue";
-import UtisakOProizvodu from "../../UtisakOProizvodu.vue"
-import UserProfileInfoPage from "./UserProfileInfoPages.vue";
-import UserRequests from "./UserRequests.vue";
-import NarudzbineKorisnik from "./NarudzbineKorisnik.vue";
+import FooterBar from "./appBar/FooterBar.vue";
+import SideBarProfil from "./appBar/MenuBar.vue";
+import EvidencijaClanova from "./EvidencijaClanova.vue"
+import Narudzbina from "./Narudzbina.vue"
+// import UtisakUprave from "../components/UtisakUprave.vue"
+import Zakazivanja from "./Zakazivanja.vue"
+import ProizvodiUprave from "./ProizvodiUprave.vue"
 export default {
     components: {
         // eslint-disable-next-line vue/no-unused-components
-        FooterBar, UtisakOProizvodu, SideBarProfil, UserRequests, PromenaLozinke, UserProfileInfoPage, NarudzbineKorisnik
+        FooterBar, SideBarProfil, EvidencijaClanova, Narudzbina, Zakazivanja, ProizvodiUprave
     },
     data() {
         return{
@@ -37,19 +38,25 @@ export default {
                 {
                     key: 2,
                     label: 'Narudžbine',
-                    index: 'narudzbine',
+                    index: 'narudzbina',
                     slika: 'narudzbine.png'
                 },
+                // {
+                //     key: 3,
+                //     label: 'Utisci',
+                //     index: 'utisakuprave',
+                //     slika: 'utisak.png'
+                // },
                 {
-                    key:3,
-                    label:'Utisci o proizvodima',
-                    index:'utisci',
-                    slika:'utisak.png'
+                    key: 3,
+                    label: 'Proizvodi',
+                    index: 'proizvodiuprave',
+                    slika: 'proizvodi.png'
                 },
                 {
                     key: 4,
-                    label: 'Profil',
-                    index: 'profil',
+                    label: 'Evidencija članova',
+                    index: 'evidencijaclanova',
                     slika: 'evidencijaclanova.png'
                 }
             ],

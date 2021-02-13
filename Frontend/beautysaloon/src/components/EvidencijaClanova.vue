@@ -144,11 +144,15 @@ export default {
     .labela2{
     text-align: center;
     font-family: cursive;
-    font-size:15px;
-    justify-content:flex-end;
-    align-items:flex-end;
+    font-size:19px;
+    color: rgba(196, 238, 162, 0.979);
     }
-    
+    .naziv
+    {
+        display: flex;
+        flex-direction: row;
+        justify-content:space-between;
+    }
     @media screen and (max-width: 700px) {
         .evidencija-clanova {
             height: 100%;

@@ -83,6 +83,8 @@ export default {
 
 <style scoped>
     .uprava-container{
+        display: flex;
+        flex-direction: row;
         height: 100%;
         width: 100%;
         position: absolute;

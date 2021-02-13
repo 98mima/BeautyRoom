@@ -3,16 +3,16 @@
         <div class="utisci-korisnika" >
             <label class="labela1">Lista utisaka o proizvodima</label>
             <el-table :data="this.listaUtisaka" height="250" style="height:300px; width:1000px; background: linear-gradient(0deg, #fbbdfc, #ffffff);">
-                <el-table-column prop="content" label="Komentar" class="table-column"></el-table-column>
                 <el-table-column prop="date" label="Datum" class="table-column"></el-table-column>
                 <el-table-column prop="nameProduct" label="Ime proizvoda" class="table-column" sortable></el-table-column>
-                <!-- <el-table-column prop="korisnikid" label="Ime korisnika" class="table-column"></el-table-column> -->
-                <!-- <el-table-column align="center">
+                <el-table-column prop="content" label="Komentar" class="table-column"></el-table-column>
+                <el-table-column prop="korisnikid" label="Ime korisnika" class="table-column"></el-table-column>
+                <el-table-column align="center">
                     <template slot-scope="scope">
                         <el-button type="danger" icon="el-icon-delete" circle size="mini" 
                             @click="deleteProductItem(scope.row._id)"   v-if="scope.row.usertype == userTypes[regularUserType]"></el-button>
                     </template>
-                </el-table-column> -->
+                </el-table-column> 
             </el-table>
             <div class="dodaj-dugme">
             <el-button @click="AddCommentForm" style="color:white; border-color:rgba(213, 34, 92, 0.925); background-color:rgba(213, 34, 92, 0.925);" type="success" class="dugme-za-dodavanje" circle>
@@ -20,10 +20,10 @@
             </el-button>         
             </div>
             <el-dialog  :visible.sync="formaDodavanje" @close="closeForm">
-                <form-dodaj-utisak-o-proizvodu @zavrsenUnos="prihvatiUnos($event)" :openDialog="this.openDialog" @closeForm="closeForm"></form-dodaj-utisak-o-proizvodu>
+                <form-dodaj-utisak-o-proizvodu :visible.sync="formaDodavanje" @close="closeForm" @zavrsenUnos="prihvatiUnos($event)" :openDialog="this.openDialog" @closeForm="closeForm"></form-dodaj-utisak-o-proizvodu>
             </el-dialog>
         </div>
-        <form-dodaj-proizvod v-if="this.showComp == 'dodaj'" @zatvoriDodavanjeProizvoda="zavrsiDodavanje"></form-dodaj-proizvod>
+        <!--<form-dodaj-proizvod v-if="this.showComp == 'dodaj'" @zatvoriDodavanjeProizvoda="zavrsiDodavanje"></form-dodaj-proizvod>-->
     </div>
 </template>
 
@@ -44,18 +44,18 @@ export default {
         }
     },
     methods:{
-        // deleteProductItem(index){
-        //     apiFetch('DELETE', destinationUrl + "/comment/delete/" + index)
-        //         .then(result =>{
-        //             if(result.Success){
-        //                 this.$message("Proizvod je uspešno obrisan!");
-        //                 this.$emit("loadDataTable");
-        //             }
-        //         }).catch(error=>{console.log(error);})
-        // },
-        // handleFormClose: function () {
-        //     this.formaDodavanje = false;
-        // },
+        deleteProductItem(index){
+            apiFetch('DELETE', destinationUrl + "/comment/delete/" + index)
+                .then(result =>{
+                    if(result.Success){
+                        this.$message("Proizvod je uspešno obrisan!");
+                        this.$emit("loadDataTable");
+                    }
+                }).catch(error=>{console.log(error);})
+        },
+        handleFormClose: function () {
+            this.formaDodavanje = false;
+        },
         AddCommentForm: function(){
             this.formaDodavanje = true;
             this.openDialog = !this.openDialog;
@@ -69,16 +69,12 @@ export default {
             // }
             // event.id_zaposleni = this.userId;
             // this.sacuvajUtisak(event)
-            this.loadDataTable()
+            this.$emit("loadDataTable");
         },
         dodajProizvod:function(){
             this.showComp='dodaj';
             setPageShown('dodaj');
         },
-        // zavrsiDodavanje(){
-        //     this.showComp='';
-        //     this.loadDataTable();
-        // },
         loadDataTable(){
             apiFetch('GET', destinationUrl + "/comment/all")
                 .then(result=>{

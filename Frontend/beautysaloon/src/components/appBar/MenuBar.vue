@@ -1,12 +1,18 @@
 <template>
     <div class="side-bar-profil">
-         <el-menu style="
+        <el-menu style=" background: linear-gradient(0deg, rgba(39, 160, 150, 0.938), rgba(111, 201, 37, 0.979) );"
+                class="el-menu-demo"
+                mode="horizontal"
+                @select="emitMenuSelect($event)"
+                text-color="white"
+                active-text-color="rgba(144, 225, 240, 0.938)">
+    <!--     <el-menu style="
                          background: linear-gradient(0deg, rgba(196, 238, 162, 0.938), rgba(111, 201, 37, 0.979) );  font-size:20px;"
                     background-color="rgba(52, 211, 198, 0.986)"
-                    mode="vertical"
+                    mode="horizontal"
                     text-color="white" 
                     active-text-color="rgba(144, 225, 240, 0.938)"
-                    @select="emitMenuSelect($event)" :router="false">
+                    @select="emitMenuSelect($event)" :router="false"> -->
                     <el-menu-item v-for="item in itemList" :key="item.key" class="side-menu-item" :index="item.index"
                         style=" background: linear-gradient(0deg, rgba(39, 160, 150, 0.938), rgba(111, 201, 37, 0.979) );">
                        <img v-if="item.slika != undefined" style="height:30%; margin-right: 1em; margin-left:0.1em; position:left;
@@ -37,12 +43,13 @@ export default {
 
 <style scoped>
 .side-bar-profil{
+    width: 100%;
+    height: 56px;
     display: flex;
-    position: relative;
-    justify-content: flex-start;
+    flex-direction: column;
 }
 .el-menu{
-    width: 250px;
+    /* width: 250px; */
     /* height: 657px; */
 }
 @media screen and (max-width: 700px){
