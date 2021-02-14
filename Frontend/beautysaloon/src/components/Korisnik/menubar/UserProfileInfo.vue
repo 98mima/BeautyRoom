@@ -30,13 +30,17 @@
         <div class="dugme">
             <el-button class="dugme-lozinka" round @click="() => $emit('openChangePasswordForm')" style="color:white; margin-right:5px; background-color: rgba(213, 34, 92, 0.925); border-color:rgba(213, 34, 92, 0.925);">Promeni lozinku</el-button>
         </div>
+        <div class="dugme1">
+            <el-button class="dugme-brisanje" type="danger"  @click="deleteUser(user.userId)"
+              icon="el-icon-delete"  style="background-color: red;">Brisanje naloga</el-button>
+        </div>
     </div>
 </template>
 
 <script>
 import picture from "../../../assets/profilepic.png";
 import { getUserInfo } from '../../../services/contextManagement';
-import { destinationUrl } from '../../../services/authFetch';
+import { destinationUrl, apiFetch } from '../../../services/authFetch';
 export default {
     data(){
         return{
@@ -52,6 +56,15 @@ export default {
         }
     },
     methods: {
+        deleteUser(userId){
+            console.log(userId);
+            apiFetch('DELETE', destinationUrl+"/user/delete/" + userId)
+                .then(result=>{
+                    if(result.Success){
+                        this.$message("Korisnik je uspešno obrisan!");
+                    }
+                }).catch(error=>{console.log(error);})
+        },
         getUser() {
             let userId = getUserInfo().userID;
             
@@ -108,7 +121,12 @@ export default {
         justify-content: center;
         align-items: center;
     }
-
+    .dugme1{
+        display: flex;
+        height: 100px;
+        justify-content:flex-end;
+        align-items: flex-end;
+    }
 
     .profile-info label {
         width: 40%;

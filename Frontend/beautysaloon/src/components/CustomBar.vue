@@ -4,14 +4,14 @@
             <div class="naslov">
                 <h3 style="color:rgba(213, 34, 92, 0.938); margin-top:5px; font-family:Georgia, 'Times New Roman', Times, serif; font-size:30px;"> Beauty Room </h3> 
             </div>
-            <div class="top-menu-button-container">
+             <div class="top-menu-button-container">
                 <el-button round size="small" class="top-menu-button" @click="zatvoriMeni"  style="color: rgba(213, 34, 92, 0.925); border-color:white; background-color:white;">
                     <el-icon class="el-icon-more"></el-icon>
                 </el-button>
                 <el-button class="odjava" round size="small" @click="logout()" style="margin-right:5px; color:white; background-color: rgba(213, 34, 92, 0.925); border-color:rgba(213, 34, 92, 0.925);"> 
                     <el-icon class="el-icon-switch-button"></el-icon>
                 </el-button>
-            </div>
+            </div> 
         </div>
         <div class="body-container">
             <transition name="el-zoom-in-center">
@@ -23,14 +23,6 @@
                 text-color="white"
                 active-text-color="rgba(144, 225, 240, 0.938)"
                 :router="false">
-     <!--           <el-menu style="width:100%; font-family:sans-serif; 
-                         background:  linear-gradient(0deg, rgba(196, 238, 162, 0.938), rgba(111, 201, 37, 0.979) );  font-size:20px;"
-                    background-color="rgba(52, 211, 198, 0.986)"
-                    :default-active="activeIndex2"
-                    mode="horizontal"
-                    text-color="white" 
-                    active-text-color="rgba(144, 225, 240, 0.938)"
-                    @select="emitMenuSelect($event)" :router="false"> -->
                     <el-menu-item v-for="item in itemList" :key="item.key" class="side-menu-item" :index="item.index"
                         style=" background: linear-gradient(0deg, rgba(39, 160, 150, 0.938), rgba(111, 201, 37, 0.979) );">
                        <img v-if="item.slika != undefined" style="height:30%; margin-right: 1em; margin-left:0.1em; position:left;
