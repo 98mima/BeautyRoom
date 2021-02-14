@@ -4,16 +4,16 @@
             <div class="naslov">
                 <h3 style="color:rgba(213, 34, 92, 0.938); margin-top:5px; font-family:Georgia, 'Times New Roman', Times, serif; font-size:30px;"> Beauty Room </h3> 
             </div>
-             <div class="top-menu-button-container">
-                <el-button round size="small" class="top-menu-button" @click="zatvoriMeni"  style="color: rgba(213, 34, 92, 0.925); border-color:white; background-color:white;">
+        </div>
+        <div class="body-container">
+            <div class="top-menu-button-container">
+                <el-button round size="small" @click="zatvoriMeni"  style="color: rgba(213, 34, 92, 0.925); border-color:white; background-color:white;">
                     <el-icon class="el-icon-more"></el-icon>
                 </el-button>
-                <el-button class="odjava" round size="small" @click="logout()" style="margin-right:5px; color:white; background-color: rgba(213, 34, 92, 0.925); border-color:rgba(213, 34, 92, 0.925);"> 
+                <el-button round size="small" @click="logout()" style="color:white; background-color: rgba(213, 34, 92, 0.925); border-color:rgba(213, 34, 92, 0.925);"> 
                     <el-icon class="el-icon-switch-button"></el-icon>
                 </el-button>
             </div> 
-        </div>
-        <div class="body-container">
             <transition name="el-zoom-in-center">
             <div class="side-menu" v-if="this.menuShown">
                 <el-menu style="width:100%; background: linear-gradient(0deg, rgba(39, 160, 150, 0.938), rgba(111, 201, 37, 0.979) );"
@@ -29,6 +29,7 @@
                        margin-top:20px;" :src="getImgUrl(item.slika)"/>{{item.label}}
                     </el-menu-item>
                 </el-menu>
+                
             </div>
             </transition>
             <slot></slot>
@@ -113,6 +114,11 @@ export default {
     padding-right: 3em;
     padding-top: 0.5em;
     padding-bottom: 0.3em;
+}
+.dugme-odjava{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
 }
 .body-container{
     /* justify-content: center; */
