@@ -5,8 +5,8 @@ const { commentValidation } = require('../validation');
 exports.getComments = async (req, res, next) => {
   try{
     const comments = await Comment.find();
-    Data = {content: comments.content,nameProduct:comments.nameProduct, productid:productid, korisnikid:comments.korisnikid, date: comments.date}
-    res.json({Data:comments});
+    const products = await Product.find().sort({"title": 1})
+    res.json({Data:comments, products: products});
     }
     catch(err){
       res.json({Success: false});

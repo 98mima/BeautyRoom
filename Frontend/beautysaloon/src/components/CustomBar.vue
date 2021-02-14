@@ -5,7 +5,7 @@
                 <h3 style="color:rgba(213, 34, 92, 0.938); margin-top:5px; font-family:Georgia, 'Times New Roman', Times, serif; font-size:30px;"> Beauty Room </h3> 
             </div>
             <div class="top-menu-button-container">
-                <el-button type="info" round size="small" class="top-menu-button" @click="zatvoriMeni"  style="color: rgba(213, 34, 92, 0.925); border-color:white; background-color:white;">
+                <el-button round size="small" class="top-menu-button" @click="zatvoriMeni"  style="color: rgba(213, 34, 92, 0.925); border-color:white; background-color:white;">
                     <el-icon class="el-icon-more"></el-icon>
                 </el-button>
                 <el-button class="odjava" round size="small" @click="logout()" style="margin-right:5px; color:white; background-color: rgba(213, 34, 92, 0.925); border-color:rgba(213, 34, 92, 0.925);"> 
@@ -21,7 +21,8 @@
                 mode="horizontal"
                 @select="emitMenuSelect($event)"
                 text-color="white"
-                active-text-color="rgba(144, 225, 240, 0.938)">
+                active-text-color="rgba(144, 225, 240, 0.938)"
+                :router="false">
      <!--           <el-menu style="width:100%; font-family:sans-serif; 
                          background:  linear-gradient(0deg, rgba(196, 238, 162, 0.938), rgba(111, 201, 37, 0.979) );  font-size:20px;"
                     background-color="rgba(52, 211, 198, 0.986)"

@@ -34,7 +34,7 @@ exports.addRequest = async (req, res, next) => {
   console.log(req.body)
   const ime = user.name;
   const request = new Request({
-    date: req.body.date,
+    date: req.body.date.substring(0, 10 ),
     comment: req.body.comment,
     time: req.body.time,
     type: req.body.type,

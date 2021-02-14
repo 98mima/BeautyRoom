@@ -58,8 +58,8 @@ export default {
         loadDataTable(){
             apiFetch('GET', destinationUrl + "/admin/products")
                 .then(result=>{
-                    console.log(result)
                     this.listaProizvoda=result.Data;
+                    console.log(this.listaProizvoda)
                 });
         }
     },

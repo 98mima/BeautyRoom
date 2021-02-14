@@ -6,13 +6,20 @@
                 <el-table-column prop="date" label="Datum" class="table-column"></el-table-column>
                 <el-table-column prop="nameProduct" label="Ime proizvoda" class="table-column" sortable></el-table-column>
                 <el-table-column prop="content" label="Komentar" class="table-column"></el-table-column>
-                <el-table-column prop="korisnikid" label="Ime korisnika" class="table-column"></el-table-column>
-                <el-table-column align="center">
+                <!-- <el-table-column prop="korisnikid" label="Ime korisnika" class="table-column"></el-table-column> -->
+                <!-- <el-table-column align="center">
                     <template slot-scope="scope">
                         <el-button type="danger" icon="el-icon-delete" circle size="mini" 
                             @click="deleteProductItem(scope.row._id)"   v-if="scope.row.usertype == userTypes[regularUserType]"></el-button>
                     </template>
-                </el-table-column> 
+                </el-table-column>  -->
+                 <el-table-column align="center" prop="Image" min-width="100">
+                    <template slot-scope="scope">
+                        <el-button type="danger" icon="el-icon-delete" circle size="mini" v-if="korisnikid(scope.row)"
+                            @click="deleteProductItem(scope.row._id)">
+                        </el-button>
+                    </template>
+                </el-table-column>
             </el-table>
             <div class="dodaj-dugme">
             <el-button @click="AddCommentForm" style="color:white; border-color:rgba(213, 34, 92, 0.925); background-color:rgba(213, 34, 92, 0.925);" type="success" class="dugme-za-dodavanje" circle>
@@ -31,7 +38,7 @@
 import PrikazUtisakaOProizvodu from "./prikazi/PrikazUtisakaOProizvodu.vue";
 import FormDodajUtisakOProizvodu from "./forms/FormDodajUtisakOProizvodu.vue";
 import { apiFetch, destinationUrl } from '../services/authFetch'
-import { setPageShown } from '../services/contextManagement'
+import { getUserInfo, setPageShown } from '../services/contextManagement'
 export default {
         // eslint-disable-next-line vue/no-unused-components
     components:{ PrikazUtisakaOProizvodu, FormDodajUtisakOProizvodu},
@@ -45,6 +52,7 @@ export default {
     },
     methods:{
         deleteProductItem(index){
+
             apiFetch('DELETE', destinationUrl + "/comment/delete/" + index)
                 .then(result =>{
                     if(result.Success){
@@ -79,10 +87,15 @@ export default {
             apiFetch('GET', destinationUrl + "/comment/all")
                 .then(result=>{
                     this.listaUtisaka=result.Data;
+                    console.log(this.listaUtisaka)
                 });
         },
         closeForm(){
             this.formaDodavanje=false;
+        },
+        korisnikid(row){
+            return row.korisnikid == getUserInfo().userID;
+            // return row.Date < this.Date
         }
     },
     mounted:function(){
